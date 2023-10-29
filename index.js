@@ -86,17 +86,73 @@ const titles = [
 
 //Array of authors and the book they wrote
 //"--- wrote --- in ---"
-
+books.forEach((books)=> {
+  console.log(
+`${books.authorFirst} ${books.authorLast} wrote ${books.name} in ${books.publishDate}`
+  );
+}); 
 //Sort books from oldest to most recent
-
+ console.log("sort books from oldest to most");
+books
+.sort((a, b) => a.publishDate - b.publishDate)
+.forEach((book) => {
+  console.log(book.name);
+});
 //sort books alphabetically
+console.log("SORT BOOKS ALPHABETICALLY");
+books.sort((a, b)=> {
+  const nameA = a.name.toLowerCase();
+  const nameB = b.name.toLowerCase();
 
+  if (nameA < nameB) {
+    return -1;
+  }
+
+  if(nameA > nameB) {
+    return 1;
+  }
+  return 0;
+
+})
+.forEach((book) => {
+  console.log(book.name);
+});
 //Find who wrote War and Peace
-
+console.log("WHO WROTE WAR AND PEACE");
+books
+.filter((book) => book.name == "War and Peace")
+.forEach((book) => {
+  console.log(book.authorFirst, book.authorLast);
+});
 //how many books were written before 1900?
+console.log("HOW MANY BOOKS WERE WRITTEN BEFORE 1900");
+books
+.filter((book) => book.publishDate <1900)
+.forEach((book) => {
+  console.log(book.name);
+});
 
+const booknumber = books.filter((book)=> book.publishDate< 1900);
+console.log(booknumber.length);
 //was there at least one book published within the last 100 years?
+console.log("WAS THERE AT LEAST ONE BOOK PUBLISHED WITHIN THE LAST 100 YEARS?");
+if (books.some((book)=> new Date().getFullYear() - book.publishDate <=100)){
+  console.log("yes");
 
+} else {
+  console.log("no");
+}
 //was every book published within the last 100 years?
-
+console.log("was every book published within the last 100 years?");
+if (books.every((book) => new Date().getFullYear() - book.publishDate <=100)) {
+  console.log("yes");
+} else {
+  console.log("no");
+}
 //print a list of books that "includes" the genre historical
+console.log("print a list of books that includes the genre historical");
+books
+.filter((book) => book.genre.includes("historical"))
+.forEach((book) => {
+ console.log(book.name);
+});
